@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/camzero94/svc1/proto";
+service MoneyFetcher {
+        rpc FetchMoney(BalanceRequest) returns (BalanceResponse);
+}
+
+message BalanceRequest{
+        string name = 1;
+    }
+
+message BalanceResponse{
+        string name = 1;
+        float balance = 2;
+    }
+

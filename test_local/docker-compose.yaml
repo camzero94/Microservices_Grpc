@@ -1,0 +1,23 @@
+services:
+  svc_1:
+    image: redis:6.2-alpine
+    container_name: svc_1_container 
+    ports:
+      - '6379:6379' 
+    command: redis-server --save 20 1 --loglevel warning --requirepass changeme
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - cache:/data
+    networks:
+      - backend
+volumes:
+  cache:
+    driver: local
+networks:
+  backend:
+    driver: bridge
+
